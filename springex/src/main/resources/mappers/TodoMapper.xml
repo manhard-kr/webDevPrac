@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.zerock.springex.mapper.TimeMapper2">
+<mapper namespace="org.zerock.springex.mapper.TodoMapper">
     <select id="getNow" resultType="string">
         SELECT NOW()
+    </select>
+
+    <insert id="insert">
+        INSERT INTO TBL_TODO(title, dueDate, writer)
+        VALUES (#{title}, #{dueDate}, #{writer})
+    </insert>
+
+    <select id="selectAll" resultType="org.zerock.springex.domain.TodoVO">
+        SELECT * FROM TBL_TODO ORDER BY TNO DESC
+    </select>
+
+    <select id="selectOne" resultType="org.zerock.springex.domain.TodoVO">
+        SELECT * FROM TBL_TODO WHERE TNO = #{tno}
     </select>
 </mapper>

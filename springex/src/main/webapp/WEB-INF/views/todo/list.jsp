@@ -12,7 +12,7 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">nav</a>
+        <a class="navbar-brand" href="#">테스트네비게이션</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -52,39 +52,29 @@
             Featured
         </div>
         <div class="card-body">
-            <form action="/todo/register" method="post">
-                <div class="input-group mb-3">
-                    <span class="input-group-text">title</span>
-                    <input type="text" name ="title" class="form-control">
-                </div>
-
-                <div class="input-group mb-3">
-                    <span class="input-group-text">DueDate</span>
-                    <input type="date" name ="dueDate" class="form-control">
-                </div>
-
-                <div class="input-group mb-3">
-                    <span class="input-group-text">Writer</span>
-                    <input type="text" name ="writer" class="form-control" placeholder="Writer">
-                </div>
-
-                <div class="my-4">
-                    <div class="float-end">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <button type="result" class="btn btn-secondary">Reset</button>
-                    </div>
-                </div>
-            </form>
-
-            <script>
-                const serverValidResult = {}
-
-                <c:forEach items="${errors}" var="error">
-                serverValidResult['${error.getField()}'] = '${error.defaultMessage}'
-                </c:forEach>
-
-                console.log(serverValidResult);
-            </script>
+            <h5 class="card-title">Card title</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Tno</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Writer</th>
+                        <th scope="col">DueDate</th>
+                        <th scope="col">Finished</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${dtoList}" var="dto">
+                        <tr>
+                            <th scope="row"><c:out value="${dto.tno}"/></th>
+                            <td><a hef="/"></a><c:out value="${dto.title}"/></td>
+                            <td><c:out value="${dto.writer}"/></td>
+                            <td><c:out value="${dto.dueDate}"/></td>
+                            <td><c:out value="${dto.finished}"/></td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
