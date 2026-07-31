@@ -17,4 +17,23 @@
     <select id="selectOne" resultType="org.zerock.springex.domain.TodoVO">
         SELECT * FROM TBL_TODO WHERE TNO = #{tno}
     </select>
+
+    <delete id="delete">
+        DELETE FROM TBL_TODO WHERE TNO = #{tno}
+    </delete>
+
+    <update id="update">
+        UPDATE TBL_TODO SET TITLE= #{title}
+                            , dueDate = #{dueDate}
+                            , finished = #{finished}
+        WHERE TNO = #{tno}
+    </update>
+
+    <select id="selectList" resultType="org.zerock.springex.domain.TodoVO">
+        SELECT * FROM TBL_TODO ORDER BY TNO DESC LIMIT #{skip}, #{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(TNO) FROM TBL_TODO
+    </select>
 </mapper>
