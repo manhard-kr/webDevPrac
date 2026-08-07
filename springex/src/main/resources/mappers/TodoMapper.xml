@@ -29,11 +29,41 @@
         WHERE TNO = #{tno}
     </update>
 
-    <select id="selectList" resultType="org.zerock.springex.domain.TodoVO">
-        SELECT * FROM TBL_TODO ORDER BY TNO DESC LIMIT #{skip}, #{size}
-    </select>
-
     <select id="getCount" resultType="int">
         SELECT COUNT(TNO) FROM TBL_TODO
+        <include refid="search"></include>
     </select>
+
+    <select id="selectList" resultType="org.zerock.springex.domain.TodoVO">
+        SELECT * FROM TBL_TODO
+        <include refid="search"></include>
+        order by tno desc limit #{page}, #{size}
+    </select>
+    
+    <sql id="search">
+        <where>
+            <if test="types != null and types.length > 0">
+                <foreach collection="types" item="type" open="(" close=")" separator=" OR ">
+                    <if test="type == 't'.toString()">
+                        TITLE LIKE CONCAT('%', #{keyword} , '%')
+                    </if>
+                    <if test="type == 'w'.toString()">
+                        WRITER LIKE CONCAT('%', #{keyword} , '%')
+                    </if>
+                </foreach>
+            </if>
+
+            <if test="finished">
+                <trim prefix="and">
+                    finished = 1
+                </trim>
+            </if>
+
+            <if test="from != null and to != null">
+                <trim prefix="and">
+                    dueDate between #{from} and #{to}
+                </trim>
+            </if>
+        </where>
+    </sql>
 </mapper>
